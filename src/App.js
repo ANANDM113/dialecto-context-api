@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Navbar } from "./Navbar";
+import { Home } from "./Home";
+import {themeContext} from "./themeContext";
+import {languageContext} from "./languageContext";
+import "./styles.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+export default function App(){
+  const [theme,setTheme]  = useState("light");
+  const [language,setLanguage]  = useState("English");
+
+  return(
+    <div className={`App ${theme}`}>
+      <themeContext.Provider value={{theme,setTheme}}>
+        <languageContext.Provider value={{language,setLanguage}}>
+          <Navbar/>
+          <Home/>
+        </languageContext.Provider>
+      </themeContext.Provider>
     </div>
-  );
+  )
 }
-
-export default App;
